@@ -2,7 +2,7 @@
  * @Author: chenzhiyuan
  * @Date:   2018-05-24 23:35:32
  * @Last Modified by:   chenzhiyuan
- * @Last Modified time: 2018-05-25 17:33:17
+ * @Last Modified time: 2018-05-27 15:31:35
  */
 
 const path = require('path');
@@ -14,8 +14,14 @@ module.exports = {
 	entry: './src/app.jsx',
 	output: {
 		path: path.resolve(__dirname, 'dist'),
-		publicPath:'/dist/',   //公共的路徑
+		publicPath: '/dist/', //公共的路徑
 		filename: 'js/app.js'
+	},
+	resolve: {
+		alias: {
+			page: path.resolve(__dirname, 'src/page'),
+			component: path.resolve(__dirname, 'src/component'),
+		}
 	},
 	module: {
 		rules: [{
@@ -70,11 +76,14 @@ module.exports = {
 		new ExtractTextPlugin("css/[name].css"),
 		// 提出公共模快
 		new webpack.optimize.CommonsChunkPlugin({
-			name:'common',
-			filename:'js/base.js'
+			name: 'common',
+			filename: 'js/base.js'
 		}),
 	],
 	devServer: {
-		port: 9000
+		port: 9000,
+		historyApiFallback: {
+			index: '/dist/index.html'
+		},
 	}
 };
