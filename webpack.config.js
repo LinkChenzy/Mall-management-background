@@ -2,7 +2,7 @@
  * @Author: chenzhiyuan
  * @Date:   2018-05-24 23:35:32
  * @Last Modified by:   chenzhiyuan
- * @Last Modified time: 2018-05-27 15:31:35
+ * @Last Modified time: 2018-05-28 17:47:35
  */
 
 const path = require('path');
@@ -21,6 +21,8 @@ module.exports = {
 		alias: {
 			page: path.resolve(__dirname, 'src/page'),
 			component: path.resolve(__dirname, 'src/component'),
+			util: path.resolve(__dirname, 'src/util'),
+			service: path.resolve(__dirname, 'src/service'),
 		}
 	},
 	module: {
@@ -85,5 +87,11 @@ module.exports = {
 		historyApiFallback: {
 			index: '/dist/index.html'
 		},
+		proxy:{
+			'/manage' : {
+                target: 'http://admintest.happymmall.com',
+                changeOrigin : true
+            }
+		}
 	}
 };
