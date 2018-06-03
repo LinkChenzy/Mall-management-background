@@ -2,7 +2,7 @@
  * @Author: chenzhiyuan
  * @Date:   2018-05-24 23:35:32
  * @Last Modified by:   chenzhiyuan
- * @Last Modified time: 2018-05-28 17:47:35
+ * @Last Modified time: 2018-06-03 16:06:06
  */
 
 const path = require('path');
@@ -84,14 +84,16 @@ module.exports = {
 	],
 	devServer: {
 		port: 9000,
+		// 首页路径配置
 		historyApiFallback: {
 			index: '/dist/index.html'
 		},
-		proxy:{
-			'/manage' : {
-                target: 'http://admintest.happymmall.com',
-                changeOrigin : true
-            }
+		// 跨域解决问题：代理proxy 
+		proxy: {
+			'/manage': {
+				target: 'http://admintest.happymmall.com', //代理/manage的指定路径
+				changeOrigin: true
+			}
 		}
 	}
 };

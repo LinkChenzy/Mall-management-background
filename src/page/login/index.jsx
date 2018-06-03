@@ -13,7 +13,8 @@ class Login extends React.Component{
 	  super(props);
 	  this.state = {
 	  	username:'',
-	  	password:''
+	  	password:'',
+	  	redirect:_mm.getUrlParam('redirect') || '/'
 	  };
 	}
 	componentWillMount(){
@@ -27,16 +28,33 @@ class Login extends React.Component{
 			[inputName]:inputValue
 		});
 	}
+	// 优化代码体验，enter实现登录
+	onInputKeyUp(e){
+		if(e.keyCode === 13){
+			this.onSubmit();
+		}
+	}
 	// 用户提交登录
 	onSubmit(){
-		_user.login({
+		let loginInfo={
 			username:this.state.username,
 			password:this.state.password
-		}).then((res)=>{
-
-		},(err)=>{
-
-		});
+		},
+		checkResult = _user.checkLoginInfo(loginInfo);
+		if(checkResult.status){
+			_user.login(loginInfo).then((res)=>{
+				localStorage.setItem('userInfo',JSON.stringify(res));
+				console.log(this.state.redirect);
+				this.props.history.push(this.state.redirect);
+			},(errMsg)=>{
+				_mm.errTips(errMsg);
+			});
+		}
+		// 验证不通过
+		else{
+			_mm.errTips(checkResult.msg);
+		}
+		
 	}
 	render (){
 		return(
@@ -53,6 +71,7 @@ class Login extends React.Component{
 										name="username"
 										className="form-control" 
 										placeholder="username"
+										onKeyUp={e => this.onInputKeyUp(e)}
 										onChange={e => this.onInputChange(e)} />
 								</div>
 								<div className="form-group">
@@ -62,6 +81,7 @@ class Login extends React.Component{
 										name="password"
 										className="form-control" 
 										placeholder="Password" 
+										onKeyUp={e => this.onInputKeyUp(e)}
 										onChange={e => this.onInputChange(e)}/>
 								</div>
 								<div className="form-group">
