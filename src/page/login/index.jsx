@@ -28,7 +28,7 @@ class Login extends React.Component{
 			[inputName]:inputValue
 		});
 	}
-	// 优化代码体验，enter实现登录
+	// 优化代码体验，Enter实现登录
 	onInputKeyUp(e){
 		if(e.keyCode === 13){
 			this.onSubmit();
@@ -41,9 +41,10 @@ class Login extends React.Component{
 			password:this.state.password
 		},
 		checkResult = _user.checkLoginInfo(loginInfo);
+		// 验证通过
 		if(checkResult.status){
 			_user.login(loginInfo).then((res)=>{
-				localStorage.setItem('userInfo',JSON.stringify(res));
+				_mm.setStorage('userInfo',res);
 				console.log(this.state.redirect);
 				this.props.history.push(this.state.redirect);
 			},(errMsg)=>{

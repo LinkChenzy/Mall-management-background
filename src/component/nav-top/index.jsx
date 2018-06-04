@@ -1,10 +1,17 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import Mutil from 'util/mm.jsx';
+
+const _mm = new Mutil();
 
 class NavTop extends React.Component{
 	constructor(props){
 		super(props);
+		this.state = {
+			username:_mm.getStorage('userInfo').username
+		}
 	}
+	// 退出按钮
 	onLogout(){
 
 	}
@@ -19,7 +26,7 @@ class NavTop extends React.Component{
 	                <li className="dropdown">
 	                    <a className="dropdown-toggle" href="javascript:;">
 	                        <i className="fa fa-user fa-fw"></i>
-	                        <span>欢迎，admin</span>
+	                        <span>欢迎，{this.state.username}</span>
 	                        <i className="fa fa-caret-down"></i>
 	                    </a>
 	                    <ul className="dropdown-menu dropdown-user">
