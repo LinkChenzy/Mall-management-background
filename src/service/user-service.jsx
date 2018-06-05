@@ -10,7 +10,7 @@ class User{
 					data:loginInfo
 			   });
 	}
-	检查登录接口是数据是否合法
+	// 检查登录接口是数据是否合法
 	checkLoginInfo(loginInfo){
 		let username = $.trim(loginInfo.username),
 			password = $.trim(loginInfo.password);
@@ -33,6 +33,12 @@ class User{
 			msg:'验证通过！'
 		}
 
+	}
+	logout(){
+		return _mm.request({
+					type:'post',
+					url:'/user/logout.do'
+			   });
 	}
 }
 export default User;

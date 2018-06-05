@@ -40,7 +40,7 @@ class MUtil{
 		return result ? decodeURIComponent(result[2]) : null;
 	}
 	// 错误提示
-	errTips(errMsg){
+	errorTips(errMsg){
 		alert(errMsg || '好像哪里不对了！');
 	}
 	// 存储数据

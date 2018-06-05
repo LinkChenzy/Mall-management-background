@@ -93,6 +93,10 @@ module.exports = {
 			'/manage': {
 				target: 'http://admintest.happymmall.com', //代理/manage的指定路径
 				changeOrigin: true
+			},
+			'/user/logout.do': {
+				target: 'http://admintest.happymmall.com', //代理/manage的指定路径
+				changeOrigin: true
 			}
 		}
 	}
