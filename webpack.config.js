@@ -2,7 +2,7 @@
  * @Author: chenzhiyuan
  * @Date:   2018-05-24 23:35:32
  * @Last Modified by:   chenzhiyuan
- * @Last Modified time: 2018-06-03 16:06:06
+ * @Last Modified time: 2018-06-07 21:58:58
  */
 
 const path = require('path');
@@ -83,7 +83,7 @@ module.exports = {
 		}),
 	],
 	devServer: {
-		port: 9000,
+		port: 8086,
 		// 首页路径配置
 		historyApiFallback: {
 			index: '/dist/index.html'

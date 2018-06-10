@@ -45,7 +45,7 @@ class Login extends React.Component{
 		if(checkResult.status){
 			_user.login(loginInfo).then((res)=>{
 				_mm.setStorage('userInfo',res);
-				console.log(this.state.redirect);
+				// console.log(this.state.redirect);
 				this.props.history.push(this.state.redirect);
 			},(errMsg)=>{
 				_mm.errTips(errMsg);

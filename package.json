@@ -11,7 +11,7 @@
     "dist_win": "set WEBPACK_ENV=online&& node_modules/.bin/webpack -p"
   },
   "devDependencies": {
-    "antd": "^3.6.1",
+    "antd": "3.6.1",
     "babel-core": "6.26.0",
     "babel-loader": "7.1.2",
     "babel-plugin-import": "^1.7.0",
@@ -30,6 +30,7 @@
   },
   "dependencies": {
     "font-awesome": "^4.7.0",
+    "rc-pagination": "1.16.4",
     "react": "16.2.0",
     "react-dom": "16.2.0",
     "react-router-dom": "4.2.2"
