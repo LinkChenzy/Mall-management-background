@@ -13,6 +13,7 @@ class Product{
 			data.pageNum               = listParam.pageNum;
 			data[listParam.searchType] = listParam.keyword;
 		}
+		console.log(data)
 		return _mm.request({
 					type:'post',
 					url:url,

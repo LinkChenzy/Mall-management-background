@@ -1,28 +1,29 @@
-import React from 'react';
-import PageTitle from 'component/page-title/index.jsx';
-import { Link } from 'react-router-dom';
-import Pagination from 'util/pagination/index.jsx';
-import TableList from 'util/table-list/index.jsx';
-import ListSearch from './index-list-search.jsx';
-import Mutil from 'util/mm.jsx';
-import Product from 'service/product-service.jsx';
+import React 			from 'react';
+import PageTitle 		from 'component/page-title/index.jsx';
+import { Link } 		from 'react-router-dom';
+import Pagination 		from 'util/pagination/index.jsx';
+import TableList 		from 'util/table-list/index.jsx';
+import ListSearch 		from './index-list-search.jsx';
+import Mutil 			from 'util/mm.jsx';
+import Product 			from 'service/product-service.jsx';
 
 import './index.scss'
-const _mm = new Mutil();
-const _product = new Product();
+const _mm 		= new Mutil();
+const _product 	= new Product();
 
 export default class ProductList extends React.Component{
 	constructor(props){
 		super(props);
 		this.state = {
-			pageNum:1,
-			list:[],
-			listType:'list'
+			pageNum:1,//初始化商品的页码
+			list:[], //初始化商品的列表
+			listType:'list'//搜索的类型
 		}
 	}
 	componentDidMount(){
 		this.loadProductList();
 	}
+	// 渲染商品列表函数
 	loadProductList(){
 		let listParam = {};
 		listParam.listType = this.state.listType;
@@ -33,7 +34,8 @@ export default class ProductList extends React.Component{
 			listParam.keyword    = this.state.searchKeyword;
 		} 
 		_product.getProductList(listParam).then(res => {
-			this.setState(res);
+			console.log('state',this.state)
+			this.setState(res,()=>{console.log(this.state )}); //res???
 		},errMsg =>{
 			this.setState({
 				list:[]
@@ -41,8 +43,10 @@ export default class ProductList extends React.Component{
 			_mm.errorTips(errMsg);
 		});
 	}
+	// 搜索函数
 	onSearch(searchType,searchKeyword){
 		let listType = searchKeyword === '' ? 'list' : 'search';
+		// 更改列表的渲染方式
 		this.setState({
 			listType     :listType,
 			pageNum      :1,
@@ -52,15 +56,16 @@ export default class ProductList extends React.Component{
 			this.loadProductList();
 		});
 	}
-	// 页面发生变化
+	// 页码发生变化
 	onPageNumChange(pageNum){
 		// 异步函数
 		this.setState({
 			pageNum:pageNum
 		},()=>{ //执行完成后
-			this.loadUserList()
+			this.loadProductList()
 		});
 	}
+	// 更改上架下架状态
 	onSetProductStatus(e,productId,currentStatus){
 		let newStatus = currentStatus == 1 ? 2 : 1,
 			confirmTips = currentStatus == 1 ? '确定要下架该商品？' : '确定要上架该商品？';
@@ -77,6 +82,7 @@ export default class ProductList extends React.Component{
 			}
 	}
 	render(){
+		// 表格的表头
 		let tabelHeaders = [
 			{name:'商品ID',width:'10%'},
 			{name:'商品信息',width:'50%'},
